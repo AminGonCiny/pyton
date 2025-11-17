@@ -1,0 +1,34 @@
+class AttrDisplay:
+    def format_dict(self,d):
+        return ', '.join(f"{k}={v}" for k, v in d.items())
+
+
+class Trojkat(AttrDisplay):
+    def __init__(self, a, b, c):
+        self.a = float(a)
+        self.b = float(b)
+        self.c = float(c)
+
+    def obwod(self):
+        return self.a + self.b + self.c
+
+    def pole(self):
+        s = self.obwod() / 2
+        return (s * (s - self.a) * (s - self.b) * (s - self.c)) ** 0.5
+
+    def wysokosc(self):
+        A = self.pole()
+        h = {
+            "ha": 2 * A / self.a,
+            "hb": 2 * A / self.b,
+            "hc": 2 * A / self.c
+        }
+        return self.format_dict(h)
+
+
+t = Trojkat(5, 12, 13)
+
+print(f"Boki: a={t.a}, b={t.b}, c={t.c}")
+print("Obwód:", t.obwod())
+print("Pole:", t.pole())
+print("Wysokości:", t.wysokosc())
