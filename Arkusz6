@@ -32,3 +32,38 @@ print(f"Boki: a={t.a}, b={t.b}, c={t.c}")
 print("Obwód:", t.obwod())
 print("Pole:", t.pole())
 print("Wysokości:", t.wysokosc())
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class attrDisplay:
+    def gatherAttrs(self):
+        attrs = []
+        for attr in sorted(self.__dict__):
+            attrs.append(f"{attr}={getattr(self, attr)}")
+        return ', '.join(attrs)
+    
+    def __str__(self):
+        return f"[{self.__class__.__name__}: {self.gatherAttrs()}]"
+    
+
+class Mieszkanie(attrDisplay):
+    def __init__(self, pow, pokoje):     
+        self.pow = pow
+        self.ilosc_pokoi = pokoje
+        self.value = None
+
+    def powierzchnia(self):
+        return self.pow / self.ilosc_pokoi
+    
+
+class Mieszkanie_Wartość(Mieszkanie):
+    def __init__(self, koszt):  
+        super().__init__(m.pow, m.ilosc_pokoi)
+        self.koszt = koszt
+
+    def wartość(self):
+        return self.koszt / m.pow  
+m = Mieszkanie(80, 4)
+mw = Mieszkanie_Wartość(400000)
+print(mw.wartość(),m.powierzchnia())
+print(mw)
